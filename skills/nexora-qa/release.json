@@ -2,16 +2,16 @@
   "schemaVersion": 2,
   "name": "nexora-qa",
   "environment": "qa",
-  "releaseId": "0.3.0-bc1330f64cdc",
-  "contentDigest": "bc1330f64cdccf52f6bc1045d4e7fed5c5efbbd0534d3a2f219330a39cdf2c22",
+  "releaseId": "0.3.0-4c52680230c8",
+  "contentDigest": "4c52680230c81efee4df6a8e416d87926d6c09c087bcf54d35d5db8e5449dbc1",
   "repository": "https://github.com/terryoyty/nexora-skills-qa.git",
-  "ref": "release-0.3.0-bc1330f64cdc",
+  "ref": "release-0.3.0-4c52680230c8",
   "skillPath": "skills/nexora-qa",
   "node": ">=22",
   "cli": {
     "name": "@nexora/cli",
     "version": "0.3.0",
     "package": "assets/nexora-cli-0.3.0.tgz",
-    "sha256": "6de9aca138517dd42e4083709dfc934aaeb2e8434c38b645b32027d76c442dfc"
+    "sha256": "ab75d10a65cddf2e6f65856062e73624ce3efa2bd4cd2c21717aff7bbf6b2475"
   }
 }
