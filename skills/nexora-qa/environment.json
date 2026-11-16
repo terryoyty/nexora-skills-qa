@@ -1,0 +1,9 @@
+{
+  "environment": "qa",
+  "profile": "fat",
+  "skillName": "nexora-qa",
+  "repository": "https://github.com/terryoyty/nexora-skills-qa.git",
+  "serverOrigin": "https://vimo.qa.aukeyit.com",
+  "frontendOrigin": "https://vimo.qa.aukeyit.com",
+  "allowHttp": false
+}
