@@ -25,7 +25,7 @@ description: 使用 Nexora qa 环境根据文字需求和可选本地参考图�
 3. 用 `nexora image generate --prompt "需求" --no-wait --json` 提交，可附参考图和用户要求的其他选项。记录 JSON 中的 `data.runId`、`data.record` 和 `pollAfterSeconds`。请求记录是 CLI 自动创建的，不要求用户编写 JSON。
 4. 执行 `nexora image wait RUN_ID --timeout 45 --json`。单次等待有限，长任务可在告知进度后继续原 Run；到本轮执行时间上限则交还 Run 与恢复命令。不要紧密循环查询，也不要因超时重提生成。
 5. `SUCCEEDED` 或 `PARTIAL_SUCCESS` 后，用 `nexora image download RUN_ID --output "目标目录" --json` 下载。部分成功也应交付已完成文件并说明失败张数；`FAILED`/`CANCELED` 如实报告，不自动创建新收费任务。
-6. 从 `data.output` 与 `data.files[].name` 得到真实图片绝对路径，确认文件存在再返回链接或展示本地图片（宿主支持时）。同时给出 Run；有需要时给出 `data.manifest`。受理状态和下载 URL 都不能代替已生成、已下载的事实。
+6. 从 `data.output` 与 `data.files[].name` 得到真实图片绝对路径，确认文件存在再返回图片预览和可点击的文件链接（宿主支持时），简短说明完成情况。成功回复默认不展示 Run ID、record、manifest、assetId 等内部标识；保留它们供后续查询与恢复，仅在用户明确索要、故障排查或中断交接确有需要时提供。只有实际下载落盘才说“已下载”；受理状态和下载 URL 都不能代替已生成、已下载的事实。
 
 ## 错误与恢复
 

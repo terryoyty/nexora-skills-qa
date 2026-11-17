@@ -3,13 +3,13 @@
   "environment": "qa",
   "files": {
     ".gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
-    "README.md": "3788c94b143f99ff4cb5ac956f2b142c42d357c550370cee874d36848fbf1186",
-    "skills/nexora-qa/SKILL.md": "a1b84625afa0b7c574d01a72e902e84ce31c13f70ed2da302771686ebfe0ccd1",
+    "README.md": "332a92d4227b4b234cff1a20239de4a0a481111c1d86f11cb4d24d06dee3e36a",
+    "skills/nexora-qa/SKILL.md": "c5acf2239f72d18f0f6bd726a5d573c21ccb14b0f0daa6e4074927728e3bcbad",
     "skills/nexora-qa/assets/nexora-cli-0.3.1.tgz": "10e85a053e7b39a793e169d07b6076c7448f699ece68ad98a55ec2a3677d9be5",
     "skills/nexora-qa/environment.json": "92423887567dd329d29c1ccb1a040c8b232210aa228021eb683e02b229cdca75",
     "skills/nexora-qa/references/commands.md": "9f8d003ed33ca6904461f69f8edb5850734d56103901e57261f36bc30c4deb5f",
     "skills/nexora-qa/references/recovery.md": "ee2f4ddc237070675d4cd76dad58e0522b10e37a852332c803c5afdeee719962",
     "skills/nexora-qa/references/setup.md": "795f9b1b8662244d4fdb8bad4d7d968595e9c7fdc7b2324a7f4b659d1124e177",
-    "skills/nexora-qa/release.json": "c2760ca46da0a761b431f58a1ac98af9590f2d6c9f79d71844e69fbc1d67b565"
+    "skills/nexora-qa/release.json": "0167f7be8fcf100f75041745ab90c68e8f5b5313f2ab62f3b88cc4fc104ec59a"
   }
 }

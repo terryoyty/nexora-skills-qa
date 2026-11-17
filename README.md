@@ -6,7 +6,7 @@ Nexora qa 环境的完整图片 Skill。
 
 `npx skills add terryoyty/nexora-skills-qa --skill nexora-qa`
 
-发布标识：`0.3.1-6d424831541a`；不可变引用：`release-0.3.1-6d424831541a`；CLI：`0.3.1`。
+发布标识：`0.3.1-3139bb78c988`；不可变引用：`release-0.3.1-3139bb78c988`；CLI：`0.3.1`。
 
 目录：`skills/nexora-qa`。包含安装说明、参考资料、环境配置、摘要清单及 CLI 包。
 
