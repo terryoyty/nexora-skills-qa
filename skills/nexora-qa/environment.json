@@ -3,7 +3,7 @@
   "profile": "fat",
   "skillName": "nexora-qa",
   "repository": "https://github.com/terryoyty/nexora-skills-qa.git",
-  "serverOrigin": "https://vimo.qa.aukeyit.com",
+  "serverOrigin": "https://vimo.qa.aukeyit.com/server",
   "frontendOrigin": "https://vimo.qa.aukeyit.com",
   "allowHttp": false
 }

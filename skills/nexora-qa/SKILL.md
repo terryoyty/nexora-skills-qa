@@ -7,14 +7,14 @@ description: 使用 Nexora qa 环境根据文字需求和可选本地参考图�
 
 使用 `nexora` CLI 完成自由创作图片生成，缺少环境时先自动安装，再继续原任务。此 Skill 不提供智能套图、智能编辑或视频功能。
 
-本 Skill 绑定 **qa**、服务 **https://vimo.qa.aukeyit.com**，来源为 https://github.com/terryoyty/nexora-skills-qa.git。
-以下所有 `nexora` 命令均指本 Skill 精确版本的绝对入口；**每个进程**（包括 version、login、status、刷新、生成、等待、下载、登出与恢复）必须同时传入 `NEXORA_CONFIG_DIR=~/.nexora/qa`（先展开用户目录）及 `NEXORA_EXPECTED_SERVER=https://vimo.qa.aukeyit.com`。运行目录按 `nexora-qa/<cli.version>` 隔离，执行方式见安装文档。不复用其他 Skill 的 PATH 或凭据。
+本 Skill 绑定 **qa**、服务 **https://vimo.qa.aukeyit.com/server**，来源为 https://github.com/terryoyty/nexora-skills-qa.git。
+以下所有 `nexora` 命令均指本 Skill 精确版本的绝对入口；**每个进程**（包括 version、login、status、刷新、生成、等待、下载、登出与恢复）必须同时传入 `NEXORA_CONFIG_DIR=~/.nexora/qa`（先展开用户目录）及 `NEXORA_EXPECTED_SERVER=https://vimo.qa.aukeyit.com/server`。运行目录按 `nexora-qa/<cli.version>` 隔离，执行方式见安装文档。不复用其他 Skill 的 PATH 或凭据。
 
 ## 准备
 
 - 首先执行 `node --version` 和 `npm --version`（Windows PowerShell 使用 `npm.cmd`），确认 Node.js 主版本至少为 22 且 npm 可用。缺失、版本不足或命令不可用时，按 [安装与登录](references/setup.md) 检查现有安装路径，必要时自动下载官方 LTS 到用户目录。安装后在当前命令环境验证并继续，不以重启 Agent 或用户手动安装为默认前置条件。
 - 执行 `nexora --version`，与本 Skill 的 [release.json](release.json) 中 `cli.version` 比较。缺失或不一致时，按安装指引直接将包内 tgz 安装到用户目录并复核版本；使用该版本的绝对入口或进程 PATH 继续。
-- 本 Skill 服务固定为 `https://vimo.qa.aukeyit.com`。执行 `nexora auth status --json`；未登录或授权失效时直接执行 `nexora login --server https://vimo.qa.aukeyit.com --json`，不向用户索要服务地址。切换环境应使用对应 Skill；现有凭据不符时停止，不静默改地址或复用身份。
+- 本 Skill 服务固定为 `https://vimo.qa.aukeyit.com/server`。执行 `nexora auth status --json`；未登录或授权失效时直接执行 `nexora login --server https://vimo.qa.aukeyit.com/server --json`，不向用户索要服务地址。切换环境应使用对应 Skill；现有凭据不符时停止，不静默改地址或复用身份。
 - 环境准备和 CLI 安装是本工作流的一部分，直接执行，无需额外询问“是否安装”。若宿主确实拦截权限或网络操作，使用宿主审批机制；只有无法自动处理的阻塞才交还用户，并说明具体失败步骤。
 - Token、刷新和凭据文件交给 CLI 管理；不读取、回显或要求用户粘贴凭据。CLI 与 MCP 各自登录。
 

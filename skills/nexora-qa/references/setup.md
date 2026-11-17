@@ -116,28 +116,28 @@ if ($LASTEXITCODE -ne 0) { throw 'CLI 安装失败' }
 $env:PATH = "$nexoraPrefix;$env:PATH"
 $nexoraCli = Join-Path $nexoraPrefix 'nexora.cmd'
 $env:NEXORA_CONFIG_DIR = Join-Path $env:USERPROFILE '.nexora\qa'
-$env:NEXORA_EXPECTED_SERVER = 'https://vimo.qa.aukeyit.com'
+$env:NEXORA_EXPECTED_SERVER = 'https://vimo.qa.aukeyit.com/server'
 $nexoraVersion = & $nexoraCli --version
 if ($LASTEXITCODE -ne 0 -or $nexoraVersion.Trim() -ne $nexoraRelease.cli.version) { throw 'CLI 版本验证失败' }
 ```
 
-macOS/Linux：同样从清单读取真实 tgz 路径，用 `sha256sum` 或 `shasum -a 256` 校验摘要。将 `nexora_prefix` 设为 `$HOME/.local/share/nexora/cli/nexora-qa/<cli.version>`（版本取自清单），执行 `npm install --global --prefix "$nexora_prefix" "实际tgz绝对路径" --no-audit --no-fund`。每次调用使用绝对入口，并传 `NEXORA_CONFIG_DIR="$HOME/.nexora/qa" NEXORA_EXPECTED_SERVER="https://vimo.qa.aukeyit.com" "$nexora_prefix/bin/nexora" --version` 复核版本。
+macOS/Linux：同样从清单读取真实 tgz 路径，用 `sha256sum` 或 `shasum -a 256` 校验摘要。将 `nexora_prefix` 设为 `$HOME/.local/share/nexora/cli/nexora-qa/<cli.version>`（版本取自清单），执行 `npm install --global --prefix "$nexora_prefix" "实际tgz绝对路径" --no-audit --no-fund`。每次调用使用绝对入口，并传 `NEXORA_CONFIG_DIR="$HOME/.nexora/qa" NEXORA_EXPECTED_SERVER="https://vimo.qa.aukeyit.com/server" "$nexora_prefix/bin/nexora" --version` 复核版本。
 
 用户目录 prefix 可直接安装所需版本，无需改写系统级旧版本。若 Agent 每次命令启动独立进程，每次都传入同一运行时目录与 CLI 目录的 PATH（包括 npm 安装阶段），或使用绝对入口；不能假设上一条命令的 PATH 修改会自动保留。Windows PowerShell 优先 `.cmd`，避免 `npm.ps1` 执行策略造成假失败；CMD 使用 `set "PATH=实际Node目录;实际CLI目录;%PATH%"`。安装失败先处理退出码和错误，不能当作已完成进入登录。
 
 ## OAuth（qa 环境）
 
-本 Skill 已配置 origin **`https://vimo.qa.aukeyit.com`**，无需用户提供地址。每条独立进程命令都要重新设置本环境变量和绝对入口。Windows PowerShell 示例：
+本 Skill 已配置服务基址 **`https://vimo.qa.aukeyit.com/server`**，无需用户提供地址。每条独立进程命令都要重新设置本环境变量和绝对入口。Windows PowerShell 示例：
 
 ```powershell
 $env:NEXORA_CONFIG_DIR = Join-Path $env:USERPROFILE '.nexora\qa'
-$env:NEXORA_EXPECTED_SERVER = 'https://vimo.qa.aukeyit.com'
+$env:NEXORA_EXPECTED_SERVER = 'https://vimo.qa.aukeyit.com/server'
 # $nexoraCli 为上文按 nexora-qa 和清单版本解析的绝对入口。
-& $nexoraCli login --server https://vimo.qa.aukeyit.com --json
+& $nexoraCli login --server https://vimo.qa.aukeyit.com/server --json
 & $nexoraCli auth status --json
 ```
 
-本环境要求 HTTPS，不允许降级协议。 地址不含 `/server` 或 `/app-api`；不从前端业务 API 路径猜测 OAuth origin。连接失败报告 qa 服务不可达，不切换服务。
+本环境要求 HTTPS，不允许降级协议。 基址已包含本环境网关路径（QA/Prod 为 `/server`，dev 无前缀）；原样使用，不删除或重复添加 `/server`，不附加 `/app-api`。连接失败报告 qa 服务不可达，不切换服务。
 
 CLI 自动发现 OAuth、登记公共客户端、生成 PKCE、监听本地回调并打开浏览器。Agent 直接启动并保持登录进程运行，等待用户在网页完成账号登录和同意，无需再问是否启动登录。浏览器未弹出时将 stderr 的授权地址提供给用户打开，不代替用户确认授权。登录完成后复核 status 的 server 和 identity，继续此前的生成或原 Run 恢复，不要求用户重复需求。不要把 Token 当作登录参数，也不读取凭据文件。
 
@@ -145,7 +145,7 @@ CLI 自动发现 OAuth、登记公共客户端、生成 PKCE、监听本地回�
 
 ```powershell
 $env:NEXORA_CONFIG_DIR = Join-Path $env:USERPROFILE '.nexora\qa'
-$env:NEXORA_EXPECTED_SERVER = 'https://vimo.qa.aukeyit.com'
+$env:NEXORA_EXPECTED_SERVER = 'https://vimo.qa.aukeyit.com/server'
 ```
 
-macOS/Linux 每条进程调用都前置 `NEXORA_CONFIG_DIR="$HOME/.nexora/qa" NEXORA_EXPECTED_SERVER="https://vimo.qa.aukeyit.com"` 并使用该 Skill/版本的绝对入口。不得迁移或覆盖旧 `~/.nexora/credentials.json`。配置目录不是图片输出目录；CLI 不读取 MCP 授权信息。
+macOS/Linux 每条进程调用都前置 `NEXORA_CONFIG_DIR="$HOME/.nexora/qa" NEXORA_EXPECTED_SERVER="https://vimo.qa.aukeyit.com/server"` 并使用该 Skill/版本的绝对入口。不得迁移或覆盖旧 `~/.nexora/credentials.json`。配置目录不是图片输出目录；CLI 不读取 MCP 授权信息。
